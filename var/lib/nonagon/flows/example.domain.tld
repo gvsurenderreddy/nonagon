@@ -1,0 +1,10 @@
+{
+  "hostname": "example.domain.tld",
+  "external": "wlan0",
+  "internal": "eth0",
+  "outaddr": "192.168.100.90",
+  "inaddr": "10.1.1.1",
+  "upspeed": "100",
+  "downspeed": "100",
+  "priority": "2"
+}

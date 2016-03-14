@@ -1,0 +1,24 @@
+#!/usr/bin/python
+import libnonagon, os, sys
+interfaces = os.getenv('NINTERFACES', './interfaces.conf')
+tc = os.getenv('TC', '/usr/bin/sudo /sbin/tc')
+ipt = os.getenv('IPT', '/usr/bin/sudo /sbin/iptables')
+ceil = os.getenv('CEIL', '1000')
+ceilrange = os.getenv('CEILRANGE', '.4')
+sfqlimit = os.getenv('SFQLIMIT', '128')
+perturb = os.getenv('SPERTURB', '10')
+classdivide = os.getenv('CLASSDIVIDE', '10')
+flowlist = os.getenv('NFLOWLIST', './var/lib/nonagon/flows')
+settings = {'tc': tc, 'ipt': ipt, 'ceil': ceil, 'ceilrange': ceilrange, 'sfqlimit': sfqlimit, 'perturb': perturb, 'classdivide': classdivide, 'interfaces': interfaces, 'flowlist': flowlist}
+libnonagon.intsettings(settings)
+if str(sys.argv[1]) == "start":
+	libnonagon.start(settings)
+elif str(sys.argv[1]) == "stop":
+	libnonagon.stop(settings)
+elif str(sys.argv[1]) == "restart":
+	libnonagon.start(settings)
+	libnonagon.stop(settings)
+elif str(sys.argv[1]) == 'status':
+	libnonagon.status(settings)
+else:
+	print "Usage: status|start|stop|restart"
